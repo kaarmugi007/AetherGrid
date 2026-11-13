@@ -16,7 +16,7 @@ export default function InfrastructureExplorerScreen() {
       title="Infrastructure Explorer"
       description={`Received architecture id: "${id}". This screen will show the architecture's resources grouped by type and how they connect.`}
       milestone="Milestone 4"
-      links={[{ label: 'Test: open a resource in this architecture', href: '/resource/res-demo-02' }]}
+      links={[{ label: 'Test: open a resource in this architecture', href: '/resource/res-web-api' }]}
     />
   );
 }

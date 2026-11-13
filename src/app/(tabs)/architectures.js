@@ -10,7 +10,7 @@ export default function ArchitecturesScreen() {
       milestone="Milestone 4"
       links={[
         // Temporary test link: opens the Infrastructure Explorer with a sample id.
-        { label: 'Test: open an architecture', href: '/architecture/arch-demo-01' },
+        { label: 'Test: open an architecture', href: '/architecture/arch-web-01' },
       ]}
     />
   );

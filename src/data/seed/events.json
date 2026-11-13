@@ -1,0 +1,20 @@
+[
+  { "resource_id": "res-web-fe2", "event_type": "alert", "severity": "warning", "message": "Sample alert: average page response time on Frontend Node B rose above the illustrative 800 ms threshold.", "created_at": "2026-11-11T09:12:00Z" },
+  { "resource_id": "res-web-lb", "event_type": "scaling", "severity": "info", "message": "Sample event: load balancer shifted more traffic to Frontend Node A while Node B is degraded.", "created_at": "2026-11-11T09:20:00Z" },
+  { "resource_id": "res-web-dbr", "event_type": "maintenance", "severity": "info", "message": "Sample event: read replica placed into a scheduled maintenance window for a minor version update.", "created_at": "2026-11-10T22:00:00Z" },
+  { "resource_id": "res-web-waf", "event_type": "security", "severity": "warning", "message": "Sample event: web firewall blocked a burst of suspicious login attempts from a single address.", "created_at": "2026-11-09T14:45:00Z" },
+  { "resource_id": "res-web-api", "event_type": "deployment", "severity": "info", "message": "Sample event: order API updated to sample version 2.4.1 with a faster checkout step.", "created_at": "2026-11-08T11:00:00Z" },
+  { "resource_id": "res-web-cache", "event_type": "alert", "severity": "info", "message": "Sample event: session cache memory use reached 70% of its illustrative limit.", "created_at": "2026-11-07T18:30:00Z" },
+  { "resource_id": "res-med-worker", "event_type": "alert", "severity": "critical", "message": "Sample alert: one of four transcoder workers stopped responding and was removed from the pool.", "created_at": "2026-11-12T03:05:00Z" },
+  { "resource_id": "res-med-queue", "event_type": "alert", "severity": "warning", "message": "Sample alert: pending transcode jobs grew to 18 because worker capacity is reduced.", "created_at": "2026-11-12T03:40:00Z" },
+  { "resource_id": "res-med-kms", "event_type": "security", "severity": "info", "message": "Sample event: scheduled 90-day rotation of media encryption keys completed.", "created_at": "2026-11-05T00:00:00Z" },
+  { "resource_id": "res-med-cdn", "event_type": "scaling", "severity": "info", "message": "Sample event: two extra edge locations enabled for a fictional live premiere.", "created_at": "2026-11-06T19:00:00Z" },
+  { "resource_id": "res-med-raw", "event_type": "alert", "severity": "warning", "message": "Sample alert: raw video bucket passed 65% of its illustrative capacity.", "created_at": "2026-11-04T08:15:00Z" },
+  { "resource_id": "res-ana-etl", "event_type": "alert", "severity": "warning", "message": "Sample alert: nightly ETL run finished 47 minutes later than its illustrative target.", "created_at": "2026-11-12T06:47:00Z" },
+  { "resource_id": "res-ana-warehouse", "event_type": "backup", "severity": "info", "message": "Sample event: warehouse snapshot created successfully.", "created_at": "2026-11-11T02:00:00Z" },
+  { "resource_id": "res-ana-collector", "event_type": "deployment", "severity": "info", "message": "Sample event: collector function memory raised from 1 GB to 2 GB.", "created_at": "2026-11-03T10:30:00Z" },
+  { "resource_id": "res-ana-iam", "event_type": "security", "severity": "info", "message": "Sample event: two analyst accounts given read-only dashboard access.", "created_at": "2026-11-02T13:10:00Z" },
+  { "resource_id": "res-int-backup", "event_type": "maintenance", "severity": "warning", "message": "Sample event: backup vault in maintenance; tonight's snapshot of the HR database is postponed.", "created_at": "2026-11-12T20:00:00Z" },
+  { "resource_id": "res-int-sso", "event_type": "security", "severity": "critical", "message": "Sample alert: unusual number of failed sign-ins detected; illustrative account lockout applied.", "created_at": "2026-11-10T07:25:00Z" },
+  { "resource_id": "res-int-vpn", "event_type": "scaling", "severity": "info", "message": "Sample event: VPN gateway connection limit raised to 250 for a fictional all-staff day.", "created_at": "2026-11-01T08:00:00Z" }
+]

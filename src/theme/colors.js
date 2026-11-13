@@ -17,5 +17,7 @@ export const colors = {
   // Status colours (always shown together with a text label, not colour alone)
   healthy: '#34D399',
   degraded: '#FBBF24',
+  maintenance: '#A5B4FC',
   critical: '#F87171',
+  info: '#60A5FA',
 };
