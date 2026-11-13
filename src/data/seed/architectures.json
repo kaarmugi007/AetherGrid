@@ -1,0 +1,30 @@
+[
+  {
+    "id": "arch-web-01",
+    "name": "Nebula Storefront",
+    "category": "Web Application",
+    "complexity": "Intermediate",
+    "description": "A fictional multi-tier online shop. Traffic passes through a web firewall and load balancer to two frontend nodes, which call an order API backed by a relational database, a read replica and a session cache."
+  },
+  {
+    "id": "arch-media-01",
+    "name": "Stellar Media Pipeline",
+    "category": "Media Processing",
+    "complexity": "Advanced",
+    "description": "A fictional video workflow. Uploads land in a raw bucket, a job queue feeds a transcoder worker pool, and processed files are served to viewers through an edge cache. All buckets are encrypted with keys from a key vault."
+  },
+  {
+    "id": "arch-analytics-01",
+    "name": "Quasar Analytics Platform",
+    "category": "Data Analytics",
+    "complexity": "Advanced",
+    "description": "A fictional analytics platform. Events are collected into a data lake, a nightly ETL cluster loads them into a warehouse, and a dashboard server lets analysts explore the results."
+  },
+  {
+    "id": "arch-internal-01",
+    "name": "Orbit Internal Tools",
+    "category": "Internal Business App",
+    "complexity": "Beginner",
+    "description": "A small fictional staff portal. Employees connect through a VPN, sign in with single sign-on, and use an HR portal backed by a database with nightly backups."
+  }
+]
