@@ -4,20 +4,20 @@
 //   error    -> e.g. "Could not load data"
 // An optional button (actionLabel + onAction) lets the user recover.
 
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../theme/colors';
+import Button from './Button';
 
-export default function StateView({ loading = false, title, message, actionLabel, onAction }) {
+export default function StateView({ loading = false, icon, title, message, actionLabel, onAction }) {
   return (
     <View style={styles.container}>
       {loading && <ActivityIndicator size="large" color={colors.primary} />}
+      {icon && !loading ? <Text style={styles.icon}>{icon}</Text> : null}
       {title ? <Text style={styles.title}>{title}</Text> : null}
       {message ? <Text style={styles.message}>{message}</Text> : null}
       {actionLabel && onAction ? (
-        <Pressable onPress={onAction} style={styles.button} accessibilityRole="button">
-          <Text style={styles.buttonText}>{actionLabel}</Text>
-        </Pressable>
+        <Button label={actionLabel} onPress={onAction} variant="secondary" style={styles.button} />
       ) : null}
     </View>
   );
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 32,
     gap: 10,
+  },
+  icon: {
+    fontSize: 36,
   },
   title: {
     color: colors.text,
@@ -45,15 +48,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 8,
-    borderColor: colors.primary,
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-  },
-  buttonText: {
-    color: colors.primary,
-    fontSize: 15,
-    fontWeight: '600',
   },
 });
