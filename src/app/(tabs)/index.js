@@ -6,10 +6,13 @@ import { useSQLiteContext } from 'expo-sqlite';
 import { useCallback, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import Button from '../../components/Button';
+import ConceptCard from '../../components/ConceptCard';
 import EventRow from '../../components/EventRow';
 import Section from '../../components/Section';
 import StateView from '../../components/StateView';
 import { StatusBadge } from '../../components/Badge';
+import { CONCEPTS, COUNT_HINTS } from '../../constants/explanations';
 import { getStatusMeta, getTypeMeta } from '../../constants/resourceMeta';
 import { getDashboardStats } from '../../services/dashboardService';
 import { getRecentEvents } from '../../services/eventService';
@@ -70,17 +73,44 @@ export default function DashboardScreen() {
         <Text style={styles.brand}>AetherGrid</Text>
         <Text style={styles.tagline}>Where the Digital Universe Connects.</Text>
         <Text style={styles.disclaimer}>
-          You are exploring a fictional sample cloud ecosystem stored on this device. All statuses and events are
-          simulated for learning.
+          AetherGrid helps you learn how cloud applications are built. Explore a fictional cloud ecosystem, see how its
+          parts rely on each other, and safely simulate what happens when one of them fails. Everything runs offline on
+          this device, and all statuses and events are sample data.
         </Text>
       </View>
 
-      {/* Four headline numbers */}
+      {/* A clear starting point for first-time users */}
+      <View style={styles.startCard}>
+        <Text style={styles.startTitle}>Start exploring</Text>
+        <StartStep number="1" text="Pick an example architecture in the Library." />
+        <StartStep number="2" text="Open its resources to see what each part does." />
+        <StartStep number="3" text="Break one in the Simulation Lab and watch the impact spread." />
+        <Button label="Browse architectures →" onPress={() => router.navigate('/architectures')} />
+        <Button label="⚡ Try a failure simulation" variant="secondary" onPress={() => router.navigate('/simulation')} />
+      </View>
+
+      {/* Four headline numbers, each with a short explanation */}
+      <Text style={styles.heading}>This ecosystem at a glance</Text>
       <View style={styles.tiles}>
-        <StatTile label="Resources" value={totals.resources} onPress={() => openCatalogue()} />
-        <StatTile label="Architectures" value={totals.architectures} onPress={() => router.navigate('/architectures')} />
-        <StatTile label="Dependencies" value={totals.dependencies} />
-        <StatTile label="Events" value={totals.events} onPress={() => router.navigate('/activity')} />
+        <StatTile
+          label="Resources"
+          hint={COUNT_HINTS.resources}
+          value={totals.resources}
+          onPress={() => openCatalogue()}
+        />
+        <StatTile
+          label="Architectures"
+          hint={COUNT_HINTS.architectures}
+          value={totals.architectures}
+          onPress={() => router.navigate('/architectures')}
+        />
+        <StatTile label="Dependencies" hint={COUNT_HINTS.dependencies} value={totals.dependencies} />
+        <StatTile
+          label="Events"
+          hint={COUNT_HINTS.events}
+          value={totals.events}
+          onPress={() => router.navigate('/activity')}
+        />
       </View>
 
       <Section title="Simulated health" subtitle={`${healthPercent}% of resources are healthy`}>
@@ -133,12 +163,22 @@ export default function DashboardScreen() {
           ))
         )}
       </Section>
+
+      <Text style={styles.heading}>New to cloud? Key ideas</Text>
+      {['architecture', 'resource', 'dependency'].map((key) => (
+        <ConceptCard
+          key={key}
+          title={CONCEPTS[key].title}
+          simple={CONCEPTS[key].simple}
+          technical={CONCEPTS[key].technical}
+        />
+      ))}
     </ScrollView>
   );
 }
 
-// A single number tile. Tappable only when onPress is given.
-function StatTile({ label, value, onPress }) {
+// A single number tile with a short explanation. Tappable only when onPress is given.
+function StatTile({ label, hint, value, onPress }) {
   return (
     <Pressable
       onPress={onPress}
@@ -147,8 +187,23 @@ function StatTile({ label, value, onPress }) {
       accessibilityRole={onPress ? 'button' : undefined}
     >
       <Text style={styles.tileValue}>{value}</Text>
-      <Text style={styles.tileLabel}>{label}</Text>
+      <Text style={styles.tileLabel}>
+        {label}
+        {onPress ? ' ›' : ''}
+      </Text>
+      <Text style={styles.tileHint}>{hint}</Text>
     </Pressable>
+  );
+}
+
+function StartStep({ number, text }) {
+  return (
+    <View style={styles.startStep}>
+      <View style={styles.startNumber}>
+        <Text style={styles.startNumberText}>{number}</Text>
+      </View>
+      <Text style={styles.startText}>{text}</Text>
+    </View>
   );
 }
 
@@ -201,8 +256,58 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   tileLabel: {
+    color: colors.text,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  tileHint: {
     color: colors.textMuted,
-    fontSize: 13,
+    fontSize: 12,
+    marginTop: 2,
+  },
+  heading: {
+    color: colors.text,
+    fontSize: 17,
+    fontWeight: '800',
+  },
+  startCard: {
+    backgroundColor: colors.surface,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    borderRadius: 14,
+    padding: 16,
+    gap: 10,
+  },
+  startTitle: {
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  startStep: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  startNumber: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: colors.surfaceAlt,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  startNumberText: {
+    color: colors.primary,
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  startText: {
+    flex: 1,
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 20,
   },
   barRow: {
     gap: 6,
