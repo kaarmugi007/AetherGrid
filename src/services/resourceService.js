@@ -19,7 +19,7 @@ export const SORT_KEYS = Object.keys(SORT_OPTIONS);
 export async function getResources(db, { search = '', type = null, status = null, region = null, sortBy = 'name' } = {}) {
   let sql = `
     SELECT r.id, r.name, r.type, r.status, r.region, r.zone, r.environment,
-           a.name AS architecture_name
+           r.architecture_id, a.name AS architecture_name
     FROM resources r
     JOIN architectures a ON a.id = r.architecture_id
     WHERE 1 = 1`; // "1 = 1" is always true; it lets us append "AND ..." safely.

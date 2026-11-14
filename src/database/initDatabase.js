@@ -12,6 +12,8 @@
 // If we change the schema or dataset later, we increase DATABASE_VERSION
 // and every phone rebuilds its database on the next launch.
 
+import { Platform } from 'react-native';
+
 import architectures from '../data/seed/architectures.json';
 import dependencies from '../data/seed/dependencies.json';
 import events from '../data/seed/events.json';
@@ -23,9 +25,16 @@ export const DATABASE_NAME = 'aethergrid.db';
 const DATABASE_VERSION = 1;
 
 export async function initDatabase(db) {
-  // WAL = a faster, safer write mode. foreign_keys = make SQLite enforce
-  // the REFERENCES rules (it is OFF by default and must be enabled per connection).
-  await db.execAsync('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
+  // foreign_keys = make SQLite enforce the REFERENCES rules
+  // (it is OFF by default and must be enabled per connection).
+  await db.execAsync('PRAGMA foreign_keys = ON;');
+
+  // WAL = a faster, safer write mode for the phone's file storage.
+  // The web version keeps the database in browser storage instead, so we
+  // only switch WAL on for Android/iOS.
+  if (Platform.OS !== 'web') {
+    await db.execAsync('PRAGMA journal_mode = WAL;');
+  }
 
   const row = await db.getFirstAsync('PRAGMA user_version');
   const currentVersion = row?.user_version ?? 0;

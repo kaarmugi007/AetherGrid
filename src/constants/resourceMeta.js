@@ -25,6 +25,16 @@ export const SEVERITY_META = {
   critical: { label: 'Critical', color: colors.critical },
 };
 
+export const COMPLEXITY_META = {
+  Beginner: { label: 'Beginner', color: colors.healthy },
+  Intermediate: { label: 'Intermediate', color: colors.primary },
+  Advanced: { label: 'Advanced', color: colors.accent },
+};
+
+// The order in which the Infrastructure Explorer shows resource "layers":
+// roughly the path a request takes, from the network edge down to the data.
+export const TYPE_ORDER = ['network', 'security', 'compute', 'application', 'database', 'storage'];
+
 export const SORT_LABELS = {
   name: 'Name',
   type: 'Type',
@@ -39,6 +49,10 @@ export function getTypeMeta(type) {
 
 export function getStatusMeta(status) {
   return STATUS_META[status] ?? { label: status, color: colors.textMuted };
+}
+
+export function getComplexityMeta(complexity) {
+  return COMPLEXITY_META[complexity] ?? { label: complexity, color: colors.textMuted };
 }
 
 export function getSeverityMeta(severity) {

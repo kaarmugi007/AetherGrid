@@ -11,9 +11,12 @@ import { useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import ConceptCard from '../../components/ConceptCard';
 import FilterChips from '../../components/FilterChips';
 import ResourceCard from '../../components/ResourceCard';
+import ScreenIntro from '../../components/ScreenIntro';
 import StateView from '../../components/StateView';
+import { CONCEPTS } from '../../constants/explanations';
 import { SORT_LABELS, getStatusMeta, getTypeMeta } from '../../constants/resourceMeta';
 import { SORT_KEYS, getFilterOptions, getResources } from '../../services/resourceService';
 import { colors } from '../../theme/colors';
@@ -97,6 +100,14 @@ export default function CatalogueScreen() {
   // scrolls away with the results, leaving more room on small phones.
   const header = (
     <View style={styles.header}>
+      <ScreenIntro text="Every building block in the fictional cloud ecosystem. Search by name, or narrow the list with the filters, then tap a resource to learn what it does and what it is connected to." />
+      <ConceptCard
+        icon="🧱"
+        title={CONCEPTS.resource.title}
+        simple={CONCEPTS.resource.simple}
+        technical={CONCEPTS.resource.technical}
+      />
+
       <View style={styles.searchBox}>
         <Text style={styles.searchIcon}>🔍</Text>
         <TextInput
@@ -117,10 +128,16 @@ export default function CatalogueScreen() {
         )}
       </View>
 
-      <FilterChips label="Type" options={typeOptions} selected={type} onChange={setType} />
-      <FilterChips label="Status" options={statusOptions} selected={status} onChange={setStatus} />
-      <FilterChips label="Region" options={regionOptions} selected={region} onChange={setRegion} />
-      <FilterChips label="Sort by" options={sortOptions} selected={sortBy} onChange={setSortBy} allowAll={false} />
+      <FilterChips label="Type" hint="what kind of component" options={typeOptions} selected={type} onChange={setType} />
+      <FilterChips label="Status" hint="sample health" options={statusOptions} selected={status} onChange={setStatus} />
+      <FilterChips label="Region" hint="fictional location" options={regionOptions} selected={region} onChange={setRegion} />
+      <FilterChips
+        label="Sort by"
+        options={sortOptions}
+        selected={sortBy}
+        onChange={setSortBy}
+        allowAll={false}
+      />
 
       <View style={styles.resultBar}>
         <Text style={styles.resultText}>
@@ -156,6 +173,7 @@ export default function CatalogueScreen() {
           <StateView loading title="Searching local data…" />
         ) : (
           <StateView
+            icon="🔍"
             title="No matching resources"
             message="Nothing in the local dataset matches your search and filters. Try another word or clear the filters."
             actionLabel="Clear filters"

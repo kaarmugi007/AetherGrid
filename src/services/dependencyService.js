@@ -28,6 +28,14 @@ export async function getDependencies(db, resourceId) {
   return { dependsOn, usedBy };
 }
 
+// Every dependency link in the database (used by the Failure Simulation Lab
+// to build the dependency graph).
+export async function getAllDependencies(db) {
+  return db.getAllAsync(
+    'SELECT id, source_id, target_id, relationship FROM dependencies ORDER BY source_id, target_id'
+  );
+}
+
 // Every link inside one architecture (used by the Infrastructure Explorer
 // and the Failure Simulation Lab in the next milestones).
 export async function getDependenciesForArchitecture(db, architectureId) {
