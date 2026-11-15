@@ -1,0 +1,43 @@
+# Continuous integration: on every push to main and every pull request
+# targeting main, GitHub installs the dependencies from package-lock.json
+# and runs the automated tests and the linter. The result is shown as a
+# check (✓ or ✗) on the commit / pull request.
+#
+# Node.js 24: React Native 0.86 supports Node ^20.19.4, ^22.13.0 or ^24.3.0,
+# and the database tests use the built-in node:sqlite module (Node 22.13+).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# The workflow only needs to read the code.
+permissions:
+  contents: read
+
+jobs:
+  test-and-lint:
+    name: Tests and lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies (clean install from package-lock.json)
+        run: npm ci
+
+      - name: Run automated tests
+        run: npm test
+
+      - name: Run Expo lint
+        run: npx expo lint
