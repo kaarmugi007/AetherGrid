@@ -24,6 +24,7 @@ Individual project for **IT3133 — ICA 03: Individual React Native Project**.
 10. [Running the app with Expo](#10-running-the-app-with-expo)
 11. [Testing and quality checks](#11-testing-and-quality-checks)
 12. [Offline operation and limitations](#12-offline-operation-and-limitations)
+    - [Verified offline behaviour](#verified-offline-behaviour)
 13. [Author](#13-author)
 
 ---
@@ -300,6 +301,19 @@ The database tests use Node's built-in `node:sqlite` with the **same schema, see
 
 *Note:* in development, Expo Go downloads the app's JavaScript from the computer over Wi-Fi. This is a requirement of the development tool, not of the app: once the app has loaded, all of its features use only local data. A standalone Android build (for example with EAS Build) contains the JavaScript and data itself and needs no connection at all.
 
+### Verified Offline Behaviour
+
+AetherGrid was tested on an Android device with the application already loaded in Expo Go. After enabling Airplane Mode, the following features continued to work:
+
+- Dashboard and resource statistics
+- Resource catalogue, search and filters
+- Resource details and dependencies
+- Architecture library and infrastructure explorer
+- Failure simulation and impact analysis
+- Activity Centre and locally stored simulation events
+
+This confirms that the application's core functionality and data operations work without an active internet connection after the development bundle has loaded. Initial loading through Expo Go still requires the development server.
+
 ### Limitations
 
 - **Educational model:** every dependency is treated as essential. Redundancy, failover and automatic recovery are not simulated (for example, a load balancer with two frontend nodes would in reality survive one node failing). Results are not predictions of real outages.
@@ -312,17 +326,4 @@ The database tests use Node's built-in `node:sqlite` with the **same schema, see
 **Kaarmugi** — GitHub: [@kaarmugi007](https://github.com/kaarmugi007)
 
 IT3133 · ICA 03 — Individual React Native Project · November 2026
-
-## Verified Offline Behaviour
-
-AetherGrid was tested on an Android device with the application already loaded in Expo Go. After enabling Airplane Mode, the following features continued to work:
-
-- Dashboard and resource statistics
-- Resource catalogue, search and filters
-- Resource details and dependencies
-- Architecture library and infrastructure explorer
-- Failure simulation and impact analysis
-- Activity Centre and locally stored simulation events
-
-This confirms that the application's core functionality and data operations work without an active internet connection after the development bundle has loaded. Initial loading through Expo Go still requires the development server.
 
