@@ -2,7 +2,8 @@
 // It receives the dataset as a parameter (instead of importing the JSON
 // itself) so it can be tested on its own.
 
-import { EVENT_SEVERITIES, RESOURCE_STATUSES, RESOURCE_TYPES } from './schema';
+// The explicit ".js" lets Node.js load this file in the automated tests too.
+import { EVENT_SEVERITIES, RESOURCE_STATUSES, RESOURCE_TYPES } from './schema.js';
 
 // Data-integrity checks run BEFORE anything is inserted.
 // Returns a list of problems; an empty list means the dataset is valid.
